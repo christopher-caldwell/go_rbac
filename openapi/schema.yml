@@ -15,6 +15,7 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
+      bearerFormat: JWT
     Rbac:
       type: http
-      scheme: bearer
+      scheme: basic

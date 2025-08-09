@@ -2,7 +2,7 @@ package main
 
 import (
 	"gorbac/internal/server"
-	auth "gorbac/internal/session"
+	auth "gorbac/session"
 	"log"
 	"net/http"
 	"os"

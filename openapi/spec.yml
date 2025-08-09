@@ -68,7 +68,7 @@ paths:
                     $ref: '#/components/responses/ServerErrorResponse'
             security:
                 -   BearerAuth: []
-                -   Rbac: []
+                    Rbac: []
     /unprotected:
         get:
             tags:
@@ -162,8 +162,9 @@ components:
         BearerAuth:
             type: http
             scheme: bearer
+            bearerFormat: JWT
             flows: {}
         Rbac:
             type: http
-            scheme: bearer
+            scheme: basic
             flows: {}

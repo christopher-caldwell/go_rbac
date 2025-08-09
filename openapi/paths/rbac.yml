@@ -27,7 +27,7 @@ RbacPaths:
     operationId: createRbacResource
     security:
       - BearerAuth: []
-      - Rbac: []
+        Rbac: []
     requestBody:
       required: true
       content:
