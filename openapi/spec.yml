@@ -1,0 +1,169 @@
+openapi: 3.0.2
+info:
+    title: Demo API for RBAC
+    version: 0.0.1
+paths:
+    /protected:
+        get:
+            tags:
+                - protected
+            summary: Get a protected resource
+            description: Get a protected resource
+            operationId: getProtectedResource
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ProtectedResource'
+                "401":
+                    $ref: '#/components/responses/UnauthorizedResponse'
+                "500":
+                    $ref: '#/components/responses/ServerErrorResponse'
+            security:
+                -   BearerAuth: []
+    /rbac:
+        get:
+            tags:
+                - rbac
+            summary: Get a resource that requires rbac
+            description: Get a resource that requires rbac
+            operationId: getRbacResource
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/RbacResource'
+                "404":
+                    $ref: '#/components/responses/NotFoundResponse'
+                "500":
+                    $ref: '#/components/responses/ServerErrorResponse'
+            security:
+                -   BearerAuth: []
+                -   Rbac: []
+        post:
+            tags:
+                - rbac
+            summary: Create a resource that requires rbac
+            description: Create a resource that requires rbac
+            operationId: createRbacResource
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/RbacResource'
+                required: true
+            responses:
+                "201":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/RbacResource'
+                "400":
+                    $ref: '#/components/responses/BadInputResponse'
+                "401":
+                    $ref: '#/components/responses/UnauthorizedResponse'
+                "500":
+                    $ref: '#/components/responses/ServerErrorResponse'
+            security:
+                -   BearerAuth: []
+                -   Rbac: []
+    /unprotected:
+        get:
+            tags:
+                - unprotected
+            summary: Get an unprotected resource
+            description: Get an unprotected resource
+            operationId: getUnprotectedResource
+            responses:
+                "200":
+                    description: Congrats, you captured the unprotected flag.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UnprotectedResource'
+                "500":
+                    $ref: '#/components/responses/ServerErrorResponse'
+components:
+    schemas:
+        ErrorMessage:
+            type: object
+            properties:
+                message:
+                    type: string
+            required:
+                - message
+        ProtectedResource:
+            description: A protected resource that any authenticated user can access
+            type: object
+            properties:
+                message:
+                    description: The message of the resource
+                    type: string
+                something_secret:
+                    description: The secret message of the resource
+                    type: string
+            required:
+                - message
+                - something_secret
+        RbacResource:
+            description: A protected resource that requires rbac
+            type: object
+            properties:
+                message:
+                    description: The message of the resource
+                    type: string
+                something_secret:
+                    description: The secret message of the resource
+                    type: string
+                something_very_secret:
+                    description: The very secret message of the resource
+                    type: string
+            required:
+                - message
+                - something_secret
+                - something_very_secret
+        UnprotectedResource:
+            description: An unprotected resource
+            type: object
+            properties:
+                message:
+                    description: The message of the resource
+                    type: string
+            required:
+                - message
+    responses:
+        BadInputResponse:
+            description: Bad input
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/ErrorMessage'
+        NotFoundResponse:
+            description: The specified resource was not found
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/ErrorMessage'
+        ServerErrorResponse:
+            description: Unexpected server error
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/ErrorMessage'
+        UnauthorizedResponse:
+            description: The request is unauthorized
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/ErrorMessage'
+    securitySchemes:
+        BearerAuth:
+            type: http
+            scheme: bearer
+            flows: {}
+        Rbac:
+            type: http
+            scheme: bearer
+            flows: {}

@@ -1,0 +1,6 @@
+BadInputResponse:
+  description: Bad input
+  content:
+    application/json:
+      schema:
+        $ref: '../schemas/error.yml#/ErrorMessage'

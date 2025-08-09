@@ -1,0 +1,21 @@
+ProtectedPaths:
+  x-ogen-operation-group: Protected
+  get:
+    tags:
+      - protected
+    summary: Get a protected resource
+    description: Get a protected resource
+    operationId: getProtectedResource
+    security:
+      - BearerAuth: []
+    responses:
+      '200':
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/resource.yml#/ProtectedResource'
+      '401':
+        $ref: '../responses/unauthorized.yml#/UnauthorizedResponse'
+      '500':
+        $ref: '../responses/server_error.yml#/ServerErrorResponse'
+  

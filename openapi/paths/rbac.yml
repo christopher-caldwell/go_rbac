@@ -1,0 +1,48 @@
+RbacPaths:
+  x-ogen-operation-group: Rbac
+  get:
+    tags:
+      - rbac
+    summary: Get a resource that requires rbac
+    description: Get a resource that requires rbac
+    operationId: getRbacResource
+    security:
+      - BearerAuth: []
+      - Rbac: []
+    responses:
+      '200':
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/resource.yml#/RbacResource'
+      '404':
+        $ref: '../responses/not_found.yml#/NotFoundResponse'
+      '500':
+        $ref: '../responses/server_error.yml#/ServerErrorResponse'
+  post:
+    tags:
+      - rbac
+    summary: Create a resource that requires rbac
+    description: Create a resource that requires rbac
+    operationId: createRbacResource
+    security:
+      - BearerAuth: []
+      - Rbac: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/resource.yml#/RbacResource'
+    responses:
+      '201':
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/resource.yml#/RbacResource'
+      '400':
+        $ref: '../responses/bad_input.yml#/BadInputResponse'
+      '401':
+        $ref: '../responses/unauthorized.yml#/UnauthorizedResponse'
+      '500':
+        $ref: '../responses/server_error.yml#/ServerErrorResponse'

@@ -1,0 +1,39 @@
+UnprotectedResource:
+  description: An unprotected resource
+  required:
+    - message
+  type: object
+  properties:
+    message:
+      type: string
+      description: The message of the resource
+ProtectedResource:
+  description: A protected resource that any authenticated user can access
+  required:
+    - message
+    - something_secret
+  type: object
+  properties:
+    message:
+      type: string
+      description: The message of the resource
+    something_secret:
+      type: string
+      description: The secret message of the resource
+RbacResource:
+  description: A protected resource that requires rbac
+  required:
+    - message
+    - something_secret
+    - something_very_secret
+  type: object
+  properties:
+    message:
+      type: string
+      description: The message of the resource
+    something_secret:
+      type: string
+      description: The secret message of the resource
+    something_very_secret:
+      type: string
+      description: The very secret message of the resource

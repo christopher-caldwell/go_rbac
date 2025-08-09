@@ -1,0 +1,18 @@
+UnprotectedPaths:
+  x-ogen-operation-group: Unprotected
+  get:
+    tags:
+      - unprotected
+    summary: Get an unprotected resource
+    description: Get an unprotected resource
+    operationId: getUnprotectedResource
+    responses:
+      '200':
+        description: Congrats, you captured the unprotected flag.
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/resource.yml#/UnprotectedResource'
+      '500':
+        $ref: '../responses/server_error.yml#/ServerErrorResponse'
+  

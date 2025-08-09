@@ -1,0 +1,20 @@
+openapi: 3.0.2
+info:
+  version: 0.0.1
+  title: Demo API for RBAC
+paths:
+  /unprotected:
+    $ref: './paths/unprotected.yml#/UnprotectedPaths'
+  /protected:
+    $ref: './paths/protected.yml#/ProtectedPaths'
+  /rbac:
+    $ref: './paths/rbac.yml#/RbacPaths'
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+    Rbac:
+      type: http
+      scheme: bearer

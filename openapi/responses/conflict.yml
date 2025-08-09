@@ -1,0 +1,6 @@
+ConflictResponse:
+  description: Business logic conflict
+  content:
+    application/json:
+      schema:
+        $ref: '../schemas/error.yml#/ErrorMessage'
