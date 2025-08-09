@@ -65,15 +65,11 @@ var operationRolesRbac = map[string][]string{
 
 func (s *Server) securityRbac(ctx context.Context, operationName OperationName, req *http.Request) (context.Context, bool, error) {
 	var t Rbac
-	if _, ok := findAuthorization(req.Header, "Basic"); !ok {
+	token, ok := findAuthorization(req.Header, "Bearer")
+	if !ok {
 		return ctx, false, nil
 	}
-	username, password, ok := req.BasicAuth()
-	if !ok {
-		return nil, false, errors.New("invalid basic auth")
-	}
-	t.Username = username
-	t.Password = password
+	t.Token = token
 	t.Roles = operationRolesRbac[operationName]
 	rctx, err := s.sec.HandleRbac(ctx, operationName, t)
 	if errors.Is(err, ogenerrors.ErrSkipServerSecurity) {
@@ -105,6 +101,6 @@ func (s *Client) securityRbac(ctx context.Context, operationName OperationName, 
 	if err != nil {
 		return errors.Wrap(err, "security source \"Rbac\"")
 	}
-	req.SetBasicAuth(t.Username, t.Password)
+	req.Header.Set("Authorization", "Bearer "+t.Token)
 	return nil
 }

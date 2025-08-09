@@ -2,7 +2,7 @@ package rbac
 
 import (
 	"context"
-	"gorbac/internal/server"
+	"gorbac/server"
 )
 
 type RbacHandler struct{}

@@ -8,13 +8,15 @@ RbacPaths:
     operationId: getRbacResource
     security:
       - BearerAuth: []
-      - Rbac: []
+        Rbac: []
     responses:
       '200':
         content:
           application/json:
             schema:
               $ref: '../schemas/resource.yml#/RbacResource'
+      '401':
+        $ref: '../responses/unauthorized.yml#/UnauthorizedResponse'
       '404':
         $ref: '../responses/not_found.yml#/NotFoundResponse'
       '500':

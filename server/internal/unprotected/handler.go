@@ -2,7 +2,7 @@ package unprotected
 
 import (
 	"context"
-	"gorbac/internal/server"
+	"gorbac/server"
 )
 
 type UnprotectedHandler struct{}

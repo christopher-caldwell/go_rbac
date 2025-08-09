@@ -35,13 +35,15 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/RbacResource'
+                "401":
+                    $ref: '#/components/responses/UnauthorizedResponse'
                 "404":
                     $ref: '#/components/responses/NotFoundResponse'
                 "500":
                     $ref: '#/components/responses/ServerErrorResponse'
             security:
                 -   BearerAuth: []
-                -   Rbac: []
+                    Rbac: []
         post:
             tags:
                 - rbac
@@ -166,5 +168,6 @@ components:
             flows: {}
         Rbac:
             type: http
-            scheme: basic
+            scheme: bearer
+            bearerFormat: JWT
             flows: {}

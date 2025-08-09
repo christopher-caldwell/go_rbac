@@ -374,6 +374,44 @@ func (s *GetRbacResourceNotFound) UnmarshalJSON(data []byte) error {
 	return s.Decode(d)
 }
 
+// Encode encodes GetRbacResourceUnauthorized as json.
+func (s *GetRbacResourceUnauthorized) Encode(e *jx.Encoder) {
+	unwrapped := (*ErrorMessage)(s)
+
+	unwrapped.Encode(e)
+}
+
+// Decode decodes GetRbacResourceUnauthorized from json.
+func (s *GetRbacResourceUnauthorized) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode GetRbacResourceUnauthorized to nil")
+	}
+	var unwrapped ErrorMessage
+	if err := func() error {
+		if err := unwrapped.Decode(d); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return errors.Wrap(err, "alias")
+	}
+	*s = GetRbacResourceUnauthorized(unwrapped)
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s *GetRbacResourceUnauthorized) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *GetRbacResourceUnauthorized) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
 // Encode implements json.Marshaler.
 func (s *ProtectedResource) Encode(e *jx.Encoder) {
 	e.ObjStart()

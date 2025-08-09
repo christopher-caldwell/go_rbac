@@ -3,7 +3,7 @@ package session
 import (
 	"context"
 	"errors"
-	"gorbac/internal/server"
+	"gorbac/server"
 	logger "gorbac/util/log"
 )
 

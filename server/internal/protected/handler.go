@@ -2,7 +2,7 @@ package protected
 
 import (
 	"context"
-	"gorbac/internal/server"
+	"gorbac/server"
 )
 
 type ProtectedHandler struct{}

@@ -511,8 +511,7 @@ func (s *Server) handleGetRbacResourceRequest(args [0]string, argsEscaped bool, 
 		if ok := func() bool {
 		nextRequirement:
 			for _, requirement := range []bitset{
-				{0b00000001},
-				{0b00000010},
+				{0b00000011},
 			} {
 				for i, mask := range requirement {
 					if satisfied[i]&mask != mask {

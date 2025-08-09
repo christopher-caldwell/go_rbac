@@ -72,6 +72,10 @@ type GetRbacResourceNotFound ErrorMessage
 
 func (*GetRbacResourceNotFound) getRbacResourceRes() {}
 
+type GetRbacResourceUnauthorized ErrorMessage
+
+func (*GetRbacResourceUnauthorized) getRbacResourceRes() {}
+
 // A protected resource that any authenticated user can access.
 // Ref: #/ProtectedResource
 type ProtectedResource struct {
@@ -104,19 +108,13 @@ func (s *ProtectedResource) SetSomethingSecret(val string) {
 func (*ProtectedResource) getProtectedResourceRes() {}
 
 type Rbac struct {
-	Username string
-	Password string
-	Roles    []string
+	Token string
+	Roles []string
 }
 
-// GetUsername returns the value of Username.
-func (s *Rbac) GetUsername() string {
-	return s.Username
-}
-
-// GetPassword returns the value of Password.
-func (s *Rbac) GetPassword() string {
-	return s.Password
+// GetToken returns the value of Token.
+func (s *Rbac) GetToken() string {
+	return s.Token
 }
 
 // GetRoles returns the value of Roles.
@@ -124,14 +122,9 @@ func (s *Rbac) GetRoles() []string {
 	return s.Roles
 }
 
-// SetUsername sets the value of Username.
-func (s *Rbac) SetUsername(val string) {
-	s.Username = val
-}
-
-// SetPassword sets the value of Password.
-func (s *Rbac) SetPassword(val string) {
-	s.Password = val
+// SetToken sets the value of Token.
+func (s *Rbac) SetToken(val string) {
+	s.Token = val
 }
 
 // SetRoles sets the value of Roles.

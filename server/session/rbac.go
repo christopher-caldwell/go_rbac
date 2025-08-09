@@ -2,7 +2,7 @@ package session
 
 import (
 	"context"
-	"gorbac/internal/server"
+	"gorbac/server"
 	logger "gorbac/util/log"
 
 	"github.com/casbin/casbin/v2"
@@ -11,6 +11,7 @@ import (
 var enforcer *casbin.Enforcer
 
 func (h *securityHandler) HandleRbac(ctx context.Context, operationName server.OperationName, t server.Rbac) (context.Context, error) {
+	logger.Logger.Info("Handling RBAC", "operationName", operationName, "token", t.Token)
 	if enforcer == nil {
 		var err error
 		enforcer, err = casbin.NewEnforcer("rbac_model.conf", "rbac_policy.csv")

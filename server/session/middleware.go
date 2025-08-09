@@ -1,7 +1,7 @@
 package session
 
 import (
-	"gorbac/internal/server"
+	"gorbac/server"
 )
 
 type contextKey string
