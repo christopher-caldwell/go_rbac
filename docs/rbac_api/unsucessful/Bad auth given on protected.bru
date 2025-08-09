@@ -1,0 +1,15 @@
+meta {
+  name: Bad auth given on protected
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:8080/protected
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer SOMETHING WOOKY
+}

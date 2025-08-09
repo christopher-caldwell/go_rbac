@@ -1,0 +1,23 @@
+meta {
+  name: User trying to create rbac
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/rbac
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer 123
+}
+
+body:json {
+  {
+    "message": "LET ME IN",
+    "something_secret": "Taxation is theft",
+    "something_very_secret": "Your friends don't like you"
+  }
+}

@@ -1,5 +1,6 @@
-p, alice, data1, read
-p, bob, data2, write
-p, data2_admin, data2, read
-p, data2_admin, data2, write
-g, alice, data2_admin
+p, 123, user, data1
+p, 456, admin, data1
+
+g, user, GetRbacResource
+g, admin, GetRbacResource
+g, admin,CreateRbacResource
