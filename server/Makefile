@@ -16,4 +16,4 @@ run: build
 	@./bin/main
 
 run-dev:
-	@. .env.local && air
+	@air
