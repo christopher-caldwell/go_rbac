@@ -12,6 +12,7 @@ paths:
             operationId: getProtectedResource
             responses:
                 "200":
+                    description: Congrats, you captured the protected flag.
                     content:
                         application/json:
                             schema:
@@ -31,6 +32,7 @@ paths:
             operationId: getRbacResource
             responses:
                 "200":
+                    description: Congrats, you captured the rbac flag.
                     content:
                         application/json:
                             schema:
@@ -58,6 +60,7 @@ paths:
                 required: true
             responses:
                 "201":
+                    description: Congrats, you captured the rbac flag.
                     content:
                         application/json:
                             schema:
