@@ -11,6 +11,7 @@ RbacPaths:
         Rbac: []
     responses:
       '200':
+        description: Congrats, you captured the rbac flag.
         content:
           application/json:
             schema:
@@ -38,6 +39,7 @@ RbacPaths:
             $ref: '../schemas/resource.yml#/RbacResource'
     responses:
       '201':
+        description: Congrats, you captured the rbac flag.
         content:
           application/json:
             schema:

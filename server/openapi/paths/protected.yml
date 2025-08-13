@@ -9,13 +9,14 @@ ProtectedPaths:
     security:
       - BearerAuth: []
     responses:
-      '200':
+      200:
+        description: Congrats, you captured the protected flag.
         content:
           application/json:
             schema:
               $ref: '../schemas/resource.yml#/ProtectedResource'
-      '401':
+      401:
         $ref: '../responses/unauthorized.yml#/UnauthorizedResponse'
-      '500':
+      500:
         $ref: '../responses/server_error.yml#/ServerErrorResponse'
   

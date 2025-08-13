@@ -1,5 +1,12 @@
 # Go RBAC Demo Using Casbin
 
+## Rust
+
+I played with the idea of doing this in Rust and the output is disgusting.
+```sh
+npx @openapitools/openapi-generator-cli generate -i server/openapi/spec.yml -g rust-axum -o rust_server
+```
+
 ## Highlights
 
 - Go server code generated from OpenAPI spec
