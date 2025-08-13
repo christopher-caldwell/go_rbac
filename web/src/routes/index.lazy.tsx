@@ -7,7 +7,7 @@ import { Stack, Text, Title } from '@mantine/core'
 const HomePage: FC = () => {
   return (
       <Stack>
-        <Title>Welcome to the RBAC Demo</Title>
+        <Title>RBAC Demo</Title>
         <Text>This is a demo of the RBAC system.</Text>
       </Stack>
   )

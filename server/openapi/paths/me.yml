@@ -1,0 +1,22 @@
+MePaths:
+  x-ogen-operation-group: Me
+  get:
+    tags:
+      - me
+    summary: Get the current user
+    description: Get the current user
+    operationId: getMe
+    security:
+      - BearerAuth: []
+    responses:
+      200:
+        description: Ok
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/user.yml#/User'
+      401:
+        $ref: '../responses/unauthorized.yml#/UnauthorizedResponse'
+      500:
+        $ref: '../responses/server_error.yml#/ServerErrorResponse'
+  

@@ -22,6 +22,15 @@ func (UnimplementedHandler) CreateRbacResource(ctx context.Context, req *RbacRes
 	return r, ht.ErrNotImplemented
 }
 
+// GetMe implements getMe operation.
+//
+// Get the current user.
+//
+// GET /me
+func (UnimplementedHandler) GetMe(ctx context.Context) (r GetMeRes, _ error) {
+	return r, ht.ErrNotImplemented
+}
+
 // GetProtectedResource implements getProtectedResource operation.
 //
 // Get a protected resource.

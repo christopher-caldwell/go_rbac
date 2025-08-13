@@ -3,6 +3,26 @@ info:
     title: Demo API for RBAC
     version: 0.0.1
 paths:
+    /me:
+        get:
+            tags:
+                - me
+            summary: Get the current user
+            description: Get the current user
+            operationId: getMe
+            responses:
+                "200":
+                    description: Ok
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/User'
+                "401":
+                    $ref: '#/components/responses/UnauthorizedResponse'
+                "500":
+                    $ref: '#/components/responses/ServerErrorResponse'
+            security:
+                -   BearerAuth: []
     /protected:
         get:
             tags:
@@ -138,6 +158,27 @@ components:
                     type: string
             required:
                 - message
+        User:
+            description: A user
+            type: object
+            properties:
+                user_id:
+                    description: The user's id
+                    type: string
+                first_name:
+                    description: The user's first name
+                    type: string
+                last_name:
+                    description: The user's last name
+                    type: string
+                email:
+                    description: The user's email
+                    type: string
+            required:
+                - user_id
+                - first_name
+                - last_name
+                - email
     responses:
         BadInputResponse:
             description: Bad input

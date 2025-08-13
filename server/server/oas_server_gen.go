@@ -8,9 +8,22 @@ import (
 
 // Handler handles operations described by OpenAPI v3 specification.
 type Handler interface {
+	MeHandler
 	ProtectedHandler
 	RbacHandler
 	UnprotectedHandler
+}
+
+// MeHandler handles operations described by OpenAPI v3 specification.
+//
+// x-ogen-operation-group: Me
+type MeHandler interface {
+	// GetMe implements getMe operation.
+	//
+	// Get the current user.
+	//
+	// GET /me
+	GetMe(ctx context.Context) (GetMeRes, error)
 }
 
 // ProtectedHandler handles operations described by OpenAPI v3 specification.

@@ -56,6 +56,14 @@ func (s *ErrorMessage) SetMessage(val string) {
 
 func (*ErrorMessage) getUnprotectedResourceRes() {}
 
+type GetMeInternalServerError ErrorMessage
+
+func (*GetMeInternalServerError) getMeRes() {}
+
+type GetMeUnauthorized ErrorMessage
+
+func (*GetMeUnauthorized) getMeRes() {}
+
 type GetProtectedResourceInternalServerError ErrorMessage
 
 func (*GetProtectedResourceInternalServerError) getProtectedResourceRes() {}
@@ -194,3 +202,58 @@ func (s *UnprotectedResource) SetMessage(val string) {
 }
 
 func (*UnprotectedResource) getUnprotectedResourceRes() {}
+
+// A user.
+// Ref: #/User
+type User struct {
+	// The user's id.
+	UserID string `json:"user_id"`
+	// The user's first name.
+	FirstName string `json:"first_name"`
+	// The user's last name.
+	LastName string `json:"last_name"`
+	// The user's email.
+	Email string `json:"email"`
+}
+
+// GetUserID returns the value of UserID.
+func (s *User) GetUserID() string {
+	return s.UserID
+}
+
+// GetFirstName returns the value of FirstName.
+func (s *User) GetFirstName() string {
+	return s.FirstName
+}
+
+// GetLastName returns the value of LastName.
+func (s *User) GetLastName() string {
+	return s.LastName
+}
+
+// GetEmail returns the value of Email.
+func (s *User) GetEmail() string {
+	return s.Email
+}
+
+// SetUserID sets the value of UserID.
+func (s *User) SetUserID(val string) {
+	s.UserID = val
+}
+
+// SetFirstName sets the value of FirstName.
+func (s *User) SetFirstName(val string) {
+	s.FirstName = val
+}
+
+// SetLastName sets the value of LastName.
+func (s *User) SetLastName(val string) {
+	s.LastName = val
+}
+
+// SetEmail sets the value of Email.
+func (s *User) SetEmail(val string) {
+	s.Email = val
+}
+
+func (*User) getMeRes() {}

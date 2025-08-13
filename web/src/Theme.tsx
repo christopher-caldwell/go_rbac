@@ -46,7 +46,7 @@ const theme = createTheme({
     xl: rem(36),
     xxl: rem(56),
   },
-	fontFamily: "Main",
+	// fontFamily: "Main",
   components: {
     Button: Button.extend({
       defaultProps: {

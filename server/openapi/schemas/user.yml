@@ -1,0 +1,21 @@
+User:
+  description: A user
+  required:
+    - user_id
+    - first_name
+    - last_name
+    - email
+  type: object
+  properties:
+    user_id:
+      type: string
+      description: The user's id
+    first_name:
+      type: string
+      description: The user's first name
+    last_name:
+      type: string
+      description: The user's last name
+    email:
+      type: string
+      description: The user's email

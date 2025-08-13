@@ -3,7 +3,7 @@ install:
 
 gen-openapi:
 	@go run github.com/ogen-go/ogen/cmd/ogen@latest \
-		--target ./internal/server \
+		--target ./server \
 		-package server \
 		--config ./openapi/.ogen.yml \
 		--clean \

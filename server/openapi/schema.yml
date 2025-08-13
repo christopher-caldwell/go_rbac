@@ -9,6 +9,8 @@ paths:
     $ref: './paths/protected.yml#/ProtectedPaths'
   /rbac:
     $ref: './paths/rbac.yml#/RbacPaths'
+  /me:
+    $ref: './paths/me.yml#/MePaths'
 
 components:
   securitySchemes:

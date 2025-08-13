@@ -5,6 +5,10 @@ type CreateRbacResourceRes interface {
 	createRbacResourceRes()
 }
 
+type GetMeRes interface {
+	getMeRes()
+}
+
 type GetProtectedResourceRes interface {
 	getProtectedResourceRes()
 }

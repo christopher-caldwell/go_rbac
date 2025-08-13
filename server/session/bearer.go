@@ -19,15 +19,15 @@ type User struct {
 
 var mockUser = User{
 	UserId:    "123",
-	FirstName: "John",
-	LastName:  "Doe",
-	Email:     "john.doe@example.com",
+	FirstName: "User",
+	LastName:  "Person",
+	Email:     "user@example.com",
 }
 var mockAdmin = User{
 	UserId:    "456",
-	FirstName: "Jane",
-	LastName:  "Doe",
-	Email:     "jane.doe@example.com",
+	FirstName: "Admin",
+	LastName:  "Person",
+	Email:     "admin@example.com",
 }
 
 func (h *securityHandler) HandleBearerAuth(ctx context.Context, operationName server.OperationName, t server.BearerAuth) (context.Context, error) {

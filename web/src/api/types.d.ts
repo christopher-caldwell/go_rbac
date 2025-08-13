@@ -4,6 +4,26 @@
  */
 
 export interface paths {
+    "/me": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get the current user
+         * @description Get the current user
+         */
+        get: operations["getMe"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/protected": {
         parameters: {
             query?: never;
@@ -96,6 +116,17 @@ export interface components {
             /** @description The message of the resource */
             message: string;
         };
+        /** @description A user */
+        User: {
+            /** @description The user's id */
+            user_id: string;
+            /** @description The user's first name */
+            first_name: string;
+            /** @description The user's last name */
+            last_name: string;
+            /** @description The user's email */
+            email: string;
+        };
     };
     responses: {
         /** @description Bad input */
@@ -142,6 +173,28 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    getMe: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["User"];
+                };
+            };
+            401: components["responses"]["UnauthorizedResponse"];
+            500: components["responses"]["ServerErrorResponse"];
+        };
+    };
     getProtectedResource: {
         parameters: {
             query?: never;
@@ -151,6 +204,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
+            /** @description Congrats, you captured the protected flag. */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -172,6 +226,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
+            /** @description Congrats, you captured the rbac flag. */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -198,6 +253,7 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Congrats, you captured the rbac flag. */
             201: {
                 headers: {
                     [name: string]: unknown;
