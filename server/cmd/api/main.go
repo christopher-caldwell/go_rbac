@@ -37,8 +37,10 @@ func main() {
 		log.Fatal(err)
 	}
 	mux := http.NewServeMux()
+
 	mux.Handle("/", srv)
 	openapi.RegisterOpenApiSpec(mux)
+	// me.RegisterCasbinPolicyHandler(mux)
 
 	c := cors.New(cors.Options{
 		AllowCredentials: true,
@@ -56,5 +58,4 @@ func main() {
 	if err := http.ListenAndServe(":"+port, handler); err != nil {
 		log.Fatal(err)
 	}
-
 }

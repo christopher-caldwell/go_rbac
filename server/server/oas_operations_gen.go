@@ -8,6 +8,7 @@ type OperationName = string
 const (
 	CreateRbacResourceOperation     OperationName = "CreateRbacResource"
 	GetMeOperation                  OperationName = "GetMe"
+	GetPermissionsOperation         OperationName = "GetPermissions"
 	GetProtectedResourceOperation   OperationName = "GetProtectedResource"
 	GetRbacResourceOperation        OperationName = "GetRbacResource"
 	GetUnprotectedResourceOperation OperationName = "GetUnprotectedResource"

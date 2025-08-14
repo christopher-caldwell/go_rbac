@@ -23,6 +23,26 @@ paths:
                     $ref: '#/components/responses/ServerErrorResponse'
             security:
                 -   BearerAuth: []
+    /permissions:
+        get:
+            tags:
+                - permissions
+            summary: Get the current user permissions
+            description: Get the current user permissions
+            operationId: getPermissions
+            responses:
+                "200":
+                    description: Ok
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Permissions'
+                "401":
+                    $ref: '#/components/responses/UnauthorizedResponse'
+                "500":
+                    $ref: '#/components/responses/ServerErrorResponse'
+            security:
+                -   BearerAuth: []
     /protected:
         get:
             tags:
@@ -119,6 +139,23 @@ components:
                     type: string
             required:
                 - message
+        Permissions:
+            type: object
+            properties:
+                g:
+                    type: array
+                    items:
+                        type: array
+                        items:
+                            type: string
+                m:
+                    type: string
+                p:
+                    type: array
+                    items:
+                        type: array
+                        items:
+                            type: string
         ProtectedResource:
             description: A protected resource that any authenticated user can access
             type: object

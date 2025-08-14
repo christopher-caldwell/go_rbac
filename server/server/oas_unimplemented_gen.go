@@ -31,6 +31,15 @@ func (UnimplementedHandler) GetMe(ctx context.Context) (r GetMeRes, _ error) {
 	return r, ht.ErrNotImplemented
 }
 
+// GetPermissions implements getPermissions operation.
+//
+// Get the current user permissions.
+//
+// GET /permissions
+func (UnimplementedHandler) GetPermissions(ctx context.Context) (r GetPermissionsRes, _ error) {
+	return r, ht.ErrNotImplemented
+}
+
 // GetProtectedResource implements getProtectedResource operation.
 //
 // Get a protected resource.

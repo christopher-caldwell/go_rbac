@@ -11,6 +11,8 @@ paths:
     $ref: './paths/rbac.yml#/RbacPaths'
   /me:
     $ref: './paths/me.yml#/MePaths'
+  /permissions  :
+    $ref: './paths/permissions.yml#/PermissionsPaths'
 
 components:
   securitySchemes:

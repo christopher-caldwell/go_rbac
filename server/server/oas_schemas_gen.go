@@ -64,6 +64,14 @@ type GetMeUnauthorized ErrorMessage
 
 func (*GetMeUnauthorized) getMeRes() {}
 
+type GetPermissionsInternalServerError ErrorMessage
+
+func (*GetPermissionsInternalServerError) getPermissionsRes() {}
+
+type GetPermissionsUnauthorized ErrorMessage
+
+func (*GetPermissionsUnauthorized) getPermissionsRes() {}
+
 type GetProtectedResourceInternalServerError ErrorMessage
 
 func (*GetProtectedResourceInternalServerError) getProtectedResourceRes() {}
@@ -83,6 +91,91 @@ func (*GetRbacResourceNotFound) getRbacResourceRes() {}
 type GetRbacResourceUnauthorized ErrorMessage
 
 func (*GetRbacResourceUnauthorized) getRbacResourceRes() {}
+
+// NewOptString returns new OptString with value set to v.
+func NewOptString(v string) OptString {
+	return OptString{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptString is optional string.
+type OptString struct {
+	Value string
+	Set   bool
+}
+
+// IsSet returns true if OptString was set.
+func (o OptString) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptString) Reset() {
+	var v string
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptString) SetTo(v string) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptString) Get() (v string, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptString) Or(d string) string {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// Ref: #/Permissions
+type Permissions struct {
+	G [][]string `json:"g"`
+	M OptString  `json:"m"`
+	P [][]string `json:"p"`
+}
+
+// GetG returns the value of G.
+func (s *Permissions) GetG() [][]string {
+	return s.G
+}
+
+// GetM returns the value of M.
+func (s *Permissions) GetM() OptString {
+	return s.M
+}
+
+// GetP returns the value of P.
+func (s *Permissions) GetP() [][]string {
+	return s.P
+}
+
+// SetG sets the value of G.
+func (s *Permissions) SetG(val [][]string) {
+	s.G = val
+}
+
+// SetM sets the value of M.
+func (s *Permissions) SetM(val OptString) {
+	s.M = val
+}
+
+// SetP sets the value of P.
+func (s *Permissions) SetP(val [][]string) {
+	s.P = val
+}
+
+func (*Permissions) getPermissionsRes() {}
 
 // A protected resource that any authenticated user can access.
 // Ref: #/ProtectedResource

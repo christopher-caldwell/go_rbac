@@ -24,6 +24,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/permissions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get the current user permissions
+         * @description Get the current user permissions
+         */
+        get: operations["getPermissions"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/protected": {
         parameters: {
             query?: never;
@@ -94,6 +114,11 @@ export interface components {
     schemas: {
         ErrorMessage: {
             message: string;
+        };
+        Permissions: {
+            g?: string[][];
+            m?: string;
+            p?: string[][];
         };
         /** @description A protected resource that any authenticated user can access */
         ProtectedResource: {
@@ -189,6 +214,28 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["User"];
+                };
+            };
+            401: components["responses"]["UnauthorizedResponse"];
+            500: components["responses"]["ServerErrorResponse"];
+        };
+    };
+    getPermissions: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Permissions"];
                 };
             };
             401: components["responses"]["UnauthorizedResponse"];

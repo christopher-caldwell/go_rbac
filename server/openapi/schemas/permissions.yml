@@ -1,0 +1,17 @@
+Permissions:
+  type: object
+  properties:
+    g:
+      type: array
+      items:
+        type: array
+        items:
+          type: string
+    m:
+      type: string
+    p:
+      type: array
+      items:
+        type: array
+        items:
+          type: string

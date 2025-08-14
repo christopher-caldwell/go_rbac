@@ -80,24 +80,58 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 					return
 				}
 
-			case 'p': // Prefix: "protected"
+			case 'p': // Prefix: "p"
 
-				if l := len("protected"); len(elem) >= l && elem[0:l] == "protected" {
+				if l := len("p"); len(elem) >= l && elem[0:l] == "p" {
 					elem = elem[l:]
 				} else {
 					break
 				}
 
 				if len(elem) == 0 {
-					// Leaf node.
-					switch r.Method {
-					case "GET":
-						s.handleGetProtectedResourceRequest([0]string{}, elemIsEscaped, w, r)
-					default:
-						s.notAllowed(w, r, "GET")
+					break
+				}
+				switch elem[0] {
+				case 'e': // Prefix: "ermissions"
+
+					if l := len("ermissions"); len(elem) >= l && elem[0:l] == "ermissions" {
+						elem = elem[l:]
+					} else {
+						break
 					}
 
-					return
+					if len(elem) == 0 {
+						// Leaf node.
+						switch r.Method {
+						case "GET":
+							s.handleGetPermissionsRequest([0]string{}, elemIsEscaped, w, r)
+						default:
+							s.notAllowed(w, r, "GET")
+						}
+
+						return
+					}
+
+				case 'r': // Prefix: "rotected"
+
+					if l := len("rotected"); len(elem) >= l && elem[0:l] == "rotected" {
+						elem = elem[l:]
+					} else {
+						break
+					}
+
+					if len(elem) == 0 {
+						// Leaf node.
+						switch r.Method {
+						case "GET":
+							s.handleGetProtectedResourceRequest([0]string{}, elemIsEscaped, w, r)
+						default:
+							s.notAllowed(w, r, "GET")
+						}
+
+						return
+					}
+
 				}
 
 			case 'r': // Prefix: "rbac"
@@ -260,28 +294,66 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 					}
 				}
 
-			case 'p': // Prefix: "protected"
+			case 'p': // Prefix: "p"
 
-				if l := len("protected"); len(elem) >= l && elem[0:l] == "protected" {
+				if l := len("p"); len(elem) >= l && elem[0:l] == "p" {
 					elem = elem[l:]
 				} else {
 					break
 				}
 
 				if len(elem) == 0 {
-					// Leaf node.
-					switch method {
-					case "GET":
-						r.name = GetProtectedResourceOperation
-						r.summary = "Get a protected resource"
-						r.operationID = "getProtectedResource"
-						r.pathPattern = "/protected"
-						r.args = args
-						r.count = 0
-						return r, true
-					default:
-						return
+					break
+				}
+				switch elem[0] {
+				case 'e': // Prefix: "ermissions"
+
+					if l := len("ermissions"); len(elem) >= l && elem[0:l] == "ermissions" {
+						elem = elem[l:]
+					} else {
+						break
 					}
+
+					if len(elem) == 0 {
+						// Leaf node.
+						switch method {
+						case "GET":
+							r.name = GetPermissionsOperation
+							r.summary = "Get the current user permissions"
+							r.operationID = "getPermissions"
+							r.pathPattern = "/permissions"
+							r.args = args
+							r.count = 0
+							return r, true
+						default:
+							return
+						}
+					}
+
+				case 'r': // Prefix: "rotected"
+
+					if l := len("rotected"); len(elem) >= l && elem[0:l] == "rotected" {
+						elem = elem[l:]
+					} else {
+						break
+					}
+
+					if len(elem) == 0 {
+						// Leaf node.
+						switch method {
+						case "GET":
+							r.name = GetProtectedResourceOperation
+							r.summary = "Get a protected resource"
+							r.operationID = "getProtectedResource"
+							r.pathPattern = "/protected"
+							r.args = args
+							r.count = 0
+							return r, true
+						default:
+							return
+						}
+					}
+
 				}
 
 			case 'r': // Prefix: "rbac"

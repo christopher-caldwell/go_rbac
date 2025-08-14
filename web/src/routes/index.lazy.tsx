@@ -2,15 +2,10 @@ import { FC } from 'react'
 import { createLazyFileRoute } from '@tanstack/react-router'
 
 import { DefaultErrorDisplay } from '@/components'
-import { Stack, Text, Title } from '@mantine/core'
+import { PermissionsCheck } from './-features/rbac'
 
 const HomePage: FC = () => {
-  return (
-      <Stack>
-        <Title>RBAC Demo</Title>
-        <Text>This is a demo of the RBAC system.</Text>
-      </Stack>
-  )
+  return <PermissionsCheck />
 }
 export const Route = createLazyFileRoute('/')({
   component: HomePage,

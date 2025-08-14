@@ -11,6 +11,22 @@ import (
 	"github.com/ogen-go/ogen/ogenerrors"
 )
 
+func newCasbinEnforcer() *casbin.Enforcer {
+	modelPath, policyPath, err := getPathsForRbacEnforcer()
+	if err != nil {
+		logger.Logger.Error("Failed to get paths for RBAC enforcer", "error", err)
+		panic(err)
+	}
+	enforcer, err := casbin.NewEnforcer(*modelPath, *policyPath)
+	if err != nil {
+		logger.Logger.Error("Failed to create enforcer", "error", err)
+		panic(err)
+	}
+	return enforcer
+}
+
+var CasbinEnforcer = newCasbinEnforcer()
+
 func (h *securityHandler) HandleRbac(ctx context.Context, operationName server.OperationName, t server.Rbac) (context.Context, error) {
 	logger.Logger.Info("Handling RBAC", "operationName", operationName, "token", t.Token)
 
@@ -20,19 +36,7 @@ func (h *securityHandler) HandleRbac(ctx context.Context, operationName server.O
 		return ctx, err
 	}
 
-	modelPath, policyPath, err := getPathsForRbacEnforcer()
-	if err != nil {
-		logger.Logger.Error("Failed to get paths for RBAC enforcer", "error", err)
-		return ctx, err
-	}
-
-	enforcer, err := casbin.NewEnforcer(*modelPath, *policyPath)
-	if err != nil {
-		logger.Logger.Error("Failed to create enforcer", "error", err)
-		return ctx, err
-	}
-
-	permitted, err := enforcer.Enforce(user.UserId, operationName, "data1")
+	permitted, err := CasbinEnforcer.Enforce(user.UserId, operationName, "data1")
 	if err != nil {
 		logger.Logger.Error("Failed to enforce", "error", err)
 		return ctx, err

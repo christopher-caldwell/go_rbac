@@ -24,6 +24,12 @@ type MeHandler interface {
 	//
 	// GET /me
 	GetMe(ctx context.Context) (GetMeRes, error)
+	// GetPermissions implements getPermissions operation.
+	//
+	// Get the current user permissions.
+	//
+	// GET /permissions
+	GetPermissions(ctx context.Context) (GetPermissionsRes, error)
 }
 
 // ProtectedHandler handles operations described by OpenAPI v3 specification.

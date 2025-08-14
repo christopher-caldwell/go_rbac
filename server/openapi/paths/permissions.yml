@@ -1,0 +1,22 @@
+PermissionsPaths:
+  x-ogen-operation-group: Me
+  get:
+    tags:
+      - permissions
+    summary: Get the current user permissions
+    description: Get the current user permissions
+    operationId: getPermissions
+    security:
+      - BearerAuth: []
+    responses:
+      200:
+        description: Ok
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/permissions.yml#/Permissions'
+      401:
+        $ref: '../responses/unauthorized.yml#/UnauthorizedResponse'
+      500:
+        $ref: '../responses/server_error.yml#/ServerErrorResponse'
+  

@@ -9,6 +9,10 @@ type GetMeRes interface {
 	getMeRes()
 }
 
+type GetPermissionsRes interface {
+	getPermissionsRes()
+}
+
 type GetProtectedResourceRes interface {
 	getProtectedResourceRes()
 }

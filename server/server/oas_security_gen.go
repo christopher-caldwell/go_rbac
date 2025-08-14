@@ -38,6 +38,7 @@ func findAuthorization(h http.Header, prefix string) (string, bool) {
 var operationRolesBearerAuth = map[string][]string{
 	CreateRbacResourceOperation:   []string{},
 	GetMeOperation:                []string{},
+	GetPermissionsOperation:       []string{},
 	GetProtectedResourceOperation: []string{},
 	GetRbacResourceOperation:      []string{},
 }
